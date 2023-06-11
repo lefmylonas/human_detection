@@ -2,3 +2,8 @@
 
 A set of simple Python scripts mainly focused on human detection.
 The best script is the Tensorflow based example in the `tf_example` folder.
+
+Libraries used:
+- opencv
+- tensorflow
+- numpy

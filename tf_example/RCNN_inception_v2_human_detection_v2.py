@@ -15,15 +15,17 @@ threshold = 0.7
 # new_frame_time = 0
 
 while(True):
-    # Calculate fps of camera by grabbing a few frames
-    num_frames = 10;
-    start = time.time()
-    for i in range(0, num_frames) :
-        ret, frame = cap.read()
-    end = time.time()
-    fps  = num_frames / (end - start)
-    fps = int(fps)
-    fps = str(fps)
+    ret, frame = cap.read()
+
+    # # Calculate fps of camera by grabbing a few frames
+    # num_frames = 10;
+    # start = time.time()
+    # for i in range(0, num_frames) :
+    #     ret, frame = cap.read()
+    # end = time.time()
+    # fps  = num_frames / (end - start)
+    # fps = int(fps)
+    # fps = str(fps)
 
     img = cv2.resize(frame, (800, 600))
     boxes, scores, classes, num = odapi.processFrame(img)
@@ -45,7 +47,7 @@ while(True):
     
     cv2.putText(img, 'Status : Detecting ', (40,40), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255,0,0), 2)
     cv2.putText(img, f'Total Persons : {person}', (40,70), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255,0,0), 2)
-    cv2.putText(img, f'fps : {fps}', (40,100), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255,0,0), 2)
+    # cv2.putText(img, f'fps : {fps}', (40,100), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255,0,0), 2)
     
 # Display the resulting frame
     cv2.imshow('frame',img)

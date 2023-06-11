@@ -1,6 +1,7 @@
-# Access to camera video feed (pc camera / rtsp video feed) via OpenCV & Human Detection examples
+# Human Detection examples
 
-A set of simple Python scripts mainly focused on human detection.
+A set of simple Python scripts for accessing camera video feed (pc camera / rtsp video feed) via OpenCV & simple Human Detection scenarios.
+
 The best script is the Tensorflow based example in the `tf_example` folder.
 
 Libraries used:

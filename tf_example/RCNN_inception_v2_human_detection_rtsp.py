@@ -26,12 +26,17 @@ q=queue.Queue()
 
 def Receive():
     global cap
-    cap = cv2.VideoCapture('rtsp://username:password@@ip:port/Streaming/Channels/101', cv2.CAP_FFMPEG)
+    counter = 0
+    cap = cv2.VideoCapture('rtsp://username:password@ip:port/Streaming/Channels/101', cv2.CAP_FFMPEG)
     ret, frame = cap.read()
     q.put(frame)
     while ret:
+        counter = counter + 1
         ret, frame = cap.read()
-        q.put(frame)
+        # reduce frames to be driven to the human detection app
+        if counter==10:
+            q.put(frame)
+            counter = 0
 
 
 def Display():

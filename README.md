@@ -5,6 +5,7 @@ A set of simple Python scripts for accessing camera video feed (pc camera / rtsp
 The best script is the Tensorflow based example in the `tf_example` folder.
 
 Libraries used:
+- flask (for web based app)
 - opencv-python (pip)
 - tensorflow
 - numpy

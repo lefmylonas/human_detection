@@ -1,7 +1,9 @@
 
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
+
+COPY . /home/ubuntu
 
 RUN apt update && apt install -y vim git pip libgl1 libglib2.0-0 
 
@@ -27,8 +29,8 @@ WORKDIR /home/ubuntu
 
 RUN rm -rf opencv-python
 
-RUN git clone https://github.com/lefmylonas/human_detection.git
-
 EXPOSE 5001
 
 EXPOSE 8002
+
+CMD ["sh", "-c", "python3 ./tf_example/gstreamer_udp_stream_web.py"]

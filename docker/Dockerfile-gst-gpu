@@ -33,6 +33,6 @@ EXPOSE 5001
 
 EXPOSE 8002
 
-WORKDIR /home/ubuntu/human_detection/tf_example
+WORKDIR /home/ubuntu/tf_example
 
 CMD ["python3", "gstreamer_udp_stream_web.py"]

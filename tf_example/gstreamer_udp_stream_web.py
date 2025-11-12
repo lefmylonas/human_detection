@@ -1,6 +1,5 @@
 # Python script based on the solution proposed in the link below:
 # https://stackoverflow.com/questions/49233433/opencv-read-errorh264-0x8f915e0-error-while-decoding-mb-53-20-bytestream
-
 from flask import Flask, render_template, Response
 import numpy as np
 import cv2

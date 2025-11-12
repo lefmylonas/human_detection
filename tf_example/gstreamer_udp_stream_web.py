@@ -4,7 +4,7 @@
 from flask import Flask, render_template, Response
 import numpy as np
 import cv2
-# from persondetection import DetectorAPI
+from persondetection import DetectorAPI
 # import time
 import queue
 import threading
@@ -26,8 +26,8 @@ q=queue.Queue()
     # fps = str(fps)
 
 app = Flask(__name__)
-# odapi = DetectorAPI()
-# threshold = 0.7    
+odapi = DetectorAPI()
+threshold = 0.7    
 
 def Receive():
     global cap
@@ -49,15 +49,15 @@ def Display():
         if q.empty() !=True:          
            img=q.get()
         #    img = cv2.resize(frame, (1280, 720), interpolation = cv2.INTER_AREA)
-        #    boxes, scores, classes, num = odapi.processFrame(img)
-        #    person = 0
-        #    acc = 0
-        #    for i in range(len(boxes)): 
-        #         if classes[i] == 1 and scores[i] > threshold:
-        #             box = boxes[i]
-        #             person += 1
-        #             cv2.rectangle(img, (box[1], box[0]), (box[3], box[2]), (255, 0, 0), 2)  # cv2.FILLED
-        #             cv2.putText(img, f'P{person, round(scores[i], 2)}', (box[1] - 30, box[0] - 8),cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 1)  # (75,0,130),
+           boxes, scores, classes, num = odapi.processFrame(img)
+           person = 0
+           acc = 0
+           for i in range(len(boxes)): 
+                if classes[i] == 1 and scores[i] > threshold:
+                    box = boxes[i]
+                    person += 1
+                    cv2.rectangle(img, (box[1], box[0]), (box[3], box[2]), (255, 0, 0), 2)  # cv2.FILLED
+                    cv2.putText(img, f'P{person, round(scores[i], 2)}', (box[1] - 30, box[0] - 8),cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 1)  # (75,0,130),
 
            # # Calculate processed video fps
            # new_frame_time = time.time()
@@ -66,8 +66,8 @@ def Display():
            # fps = int(fps)
            # fps = str(fps)
             
-        #    cv2.putText(img, 'Status : Detecting ', (50,200), cv2.FONT_HERSHEY_DUPLEX, 1.8, (255,0,0), 3)
-        #    cv2.putText(img, f'Total Persons : {person}', (50,260), cv2.FONT_HERSHEY_DUPLEX, 1.8, (255,0,0), 3)
+           cv2.putText(img, 'Status : Detecting ', (50,200), cv2.FONT_HERSHEY_DUPLEX, 1.8, (255,0,0), 3)
+           cv2.putText(img, f'Total Persons : {person}', (50,260), cv2.FONT_HERSHEY_DUPLEX, 1.8, (255,0,0), 3)
            # cv2.putText(img, f'fps : {fps}', (40,160), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255,0,0), 2)
 
            ret, buffer = cv2.imencode('.jpg', img)
@@ -88,8 +88,8 @@ def index():
 
 if __name__=='__main__':
     p1=threading.Thread(target=Receive)
-    # p2 = threading.Thread(target=Display)
+    p2 = threading.Thread(target=Display)
     p1.start()
-    # p2.start()
+    p2.start()
     app.run(host='0.0.0.0', port=5001)
     # app.run(debug=True)

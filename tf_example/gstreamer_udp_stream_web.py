@@ -36,12 +36,12 @@ def Receive():
     ret, frame = cap.read()
     q.put(frame)
     while ret:
-        # counter = counter + 1
+        counter = counter + 1
         ret, frame = cap.read()
         # reduce frames to be driven to the human detection app
-        # if counter==10:
+        if counter==10:
         q.put(frame)
-            # counter = 0
+           counter = 0
 
 
 def Display():
